@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Camera Test</title>
+</head>
+<body style="text-align:center; font-family:sans-serif;">
+  <h2>تکایە کامێرا چالاک بکە 📸</h2>
+  <video id="video" width="300" autoplay></video>
+  <br><br>
+  <button onclick="takePhoto()">وێنە بگرە</button>
+  <br><br>
+  <canvas id="canvas" width="300"></canvas>
+
+  <script>
+    const video = document.getElementById('video');
+
+    // داوای کامێرا
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        alert("کامێرا ڕێگەپێنەدرا");
+      });
+
+    function takePhoto() {
+      const canvas = document.getElementById('canvas');
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, 300, 200);
+    }
+  </script>
+</body>
+</html>
